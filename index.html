@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escape School - Coding Mystery</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- ================= LOADING SCREEN ================= -->
+
+<div id="loadingScreen" class="loading-screen">
+
+    <div class="loading-content">
+
+        <div class="loading-logo">🏫</div>
+
+        <h1>ESCAPE <span>SCHOOL</span></h1>
+
+        <p id="loadingText">Menyiapkan permainan...</p>
+
+        <div class="loading-bar">
+            <div class="loading-fill" id="loadingFill"></div>
+        </div>
+
+        <p class="loading-percent" id="loadingPercent">0%</p>
+
+    </div>
+
+</div>
+
+    <div class="game-container">
+
+       <!-- ================= START SCREEN ================= -->
+
+<section id="startScreen" class="screen active">
+
+    <div class="start-card">
+
+        <!-- CHARACTER -->
+        <div class="start-character">
+            <img
+                src="images/character-standing.png"
+                alt="Karakter Escape School"
+            >
+        </div>
+
+        <!-- MENU CONTENT -->
+        <div class="start-menu">
+
+            <img
+                class="game-logo"
+                src="images/logo game.png"
+                alt="Escape School Coding Mystery"
+            >
+
+            <div class="text-box">
+
+    <div class="small-title">
+        A CHIBI CODING MYSTERY GAME
+    </div>
+
+    <div class="tagline">
+        Pecahkan puzzle coding,<br>
+        dan temukan jalan keluar!
+    </div>
+
+</div>
+
+            <button class="main-button" onclick="startGame()">
+                ▶ <span>Mulai Game</span>
+            </button>
+
+            <p class="start-note">
+                5 Level • HTML • CSS • JavaScript
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+        <!-- ================= GAME SCREEN ================= -->
+
+        <section id="gameScreen" class="screen">
+
+            <!-- TOP BAR -->
+
+            <header class="game-header">
+
+                <div class="game-title">
+                    🏫 <span>ESCAPE SCHOOL</span>
+                </div>
+
+                <div class="level-badge" id="levelBadge">
+                    LEVEL 1
+                </div>
+
+                <button class="restart-button" onclick="restartGame()">
+                    ↻
+                </button>
+
+            </header>
+
+
+            <!-- GAME AREA -->
+
+            <main class="game-area" id="gameArea">
+
+                <!-- CHARACTER -->
+
+<div class="character" id="character">
+
+    <img
+        id="characterImage"
+        src="images/character-standing.png"
+        alt="Karakter pemain"
+    >
+
+</div>
+
+
+                <!-- CLUE BOX -->
+
+                <div class="clue-box" id="clueBox">
+
+                    <div class="clue-icon">💡</div>
+
+                    <div>
+                        <strong id="clueTitle">Petunjuk Kelas</strong>
+
+                        <p id="clueText">
+                            Cari soal HTML di sekitar kelas!
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <!-- ROOM OBJECTS -->
+
+                <div class="objects" id="objects"></div>
+
+            </main>
+
+            <!-- MOVEMENT INFORMATION -->
+
+<div class="movement-help">
+    Gunakan tombol panah atau W A S D untuk bergerak
+</div>
+
+<!-- MOBILE MOVEMENT CONTROLS -->
+
+<div class="mobile-controls">
+
+    <button onclick="movePlayer('up')">▲</button>
+
+    <div class="horizontal-controls">
+        <button onclick="movePlayer('left')">◀</button>
+        <button onclick="movePlayer('down')">▼</button>
+        <button onclick="movePlayer('right')">▶</button>
+    </div>
+
+</div>
+
+
+            <!-- BOTTOM PANEL -->
+
+            <section class="bottom-panel">
+
+                <div class="location-info">
+
+                    <span id="locationEmoji">🏫</span>
+
+                    <div>
+                        <small>LOKASI SEKARANG</small>
+                        <h2 id="locationName">Ruang Kelas</h2>
+                    </div>
+
+                </div>
+
+
+                <div class="progress-area">
+
+                    <div class="progress-label">
+                        <span>Progress</span>
+                        <span id="progressText">Level 1 / 3</span>
+                    </div>
+
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+
+                </div>
+
+
+                <button class="hint-button" onclick="showHint()">
+                    💡 Petunjuk
+                </button>
+
+            </section>
+
+        </section>
+
+
+        <!-- ================= PUZZLE MODAL ================= -->
+
+        <div class="modal-overlay" id="puzzleModal">
+
+            <div class="puzzle-modal">
+
+                <button class="close-modal" onclick="closePuzzle()">
+                    ×
+                </button>
+
+
+                <div class="puzzle-symbol" id="puzzleSymbol">
+                    💻
+                </div>
+
+                <p class="puzzle-label" id="puzzleLabel">
+                    PUZZLE LEVEL 1
+                </p>
+
+                <h2 id="puzzleTitle">
+                    HTML Challenge
+                </h2>
+
+                <p class="puzzle-description" id="puzzleDescription">
+                    Jawab pertanyaan berikut untuk melanjutkan.
+                </p>
+
+
+                <!-- QUESTION -->
+
+                <div class="question-box">
+
+                    <p class="question-number" id="questionNumber">
+                        Pertanyaan 1
+                    </p>
+
+                    <h3 id="questionText">
+                        Pertanyaan akan muncul di sini.
+                    </h3>
+
+                    <!-- CODE BOX -->
+
+                    <pre id="codeQuestion" class="code-question"></pre>
+
+                </div>
+
+
+                <!-- ANSWER OPTIONS -->
+
+                <div class="answer-options" id="answerOptions"></div>
+
+
+                <!-- FEEDBACK -->
+
+                <p class="feedback" id="feedback"></p>
+
+
+                <!-- NEXT BUTTON -->
+
+                <button
+                    class="next-button"
+                    id="nextButton"
+                    onclick="nextQuestion()"
+                    style="display: none;"
+                >
+                    Lanjut →
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= WIN SCREEN ================= -->
+
+        <section id="winScreen" class="screen">
+
+            <div class="win-content">
+
+                <div class="confetti">✨ ⭐ ✨</div>
+
+                <div class="win-icon">🎉</div>
+
+                <p class="small-title">MISSION COMPLETE</p>
+
+                <h1>SELAMAT!</h1>
+
+                <p class="win-text">
+                    Kamu berhasil menyelesaikan semua<br>
+                    tantangan coding dan keluar dari sekolah!
+                </p>
+
+
+                <div class="win-stats">
+
+                    <div>
+                        <strong>5</strong>
+                        <span>Level Selesai</span>
+                    </div>
+
+                    <div>
+                        <strong>💻</strong>
+                        <span>Coding Master</span>
+                    </div>
+
+                </div>
+
+
+                <div class="header-buttons">
+
+    <button class="music-button" id="musicButton" onclick="toggleMusic()">
+        🔊
+    </button>
+
+    <button class="restart-button" onclick="restartGame()">
+        ↻
+    </button>
+
+</div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+    <!-- BACKSOUND GAME -->
+<audio id="gameMusic" loop>
+    <source src="audio/school-bgm.mp3" type="audio/mpeg">
+</audio>
+
+<script src="script.js"></script>
+
+</body>
+</html>
