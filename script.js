@@ -508,18 +508,20 @@ function startGame() {
     currentLevel = 1;
     currentQuestion = 0;
 
-    // Nyalakan backsound
-    playGameMusic();
-
     startScreen.classList.remove("active");
     winScreen.classList.remove("active");
 
     showLoading(() => {
 
         gameScreen.classList.add("active");
+
         loadLevel(currentLevel);
 
+        // Tulisan kontrol hanya muncul sekali selama 7 detik
+        showMovementHelpOnce();
+
     }, "Memasuki sekolah...");
+
 }
 
 /* =========================================
@@ -1114,4 +1116,28 @@ function toggleMusic() {
 
     }
 
+}
+/* =========================================
+   MOVEMENT HELP - MUNCUL 1X SELAMA 7 DETIK
+   ========================================= */
+
+const movementHelp = document.getElementById("movementHelp");
+
+let movementHelpAlreadyShown = false;
+
+function showMovementHelpOnce() {
+
+    if (!movementHelp || movementHelpAlreadyShown) {
+        return;
+    }
+
+    movementHelpAlreadyShown = true;
+
+    // Munculkan tulisan
+    movementHelp.classList.remove("hide");
+
+    // Hilangkan setelah 7 detik
+    setTimeout(() => {
+        movementHelp.classList.add("hide");
+    }, 7000);
 }

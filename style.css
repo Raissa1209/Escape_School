@@ -704,21 +704,34 @@ body {
 
 
 /* =========================================
-   MOBILE CONTROLS
-========================================= */
+   MOBILE MOVEMENT CONTROLS
+   ========================================= */
+
+#gameScreen {
+    position: relative;
+}
 
 .mobile-controls {
     position: absolute;
 
-    right: 25px;
-    bottom: 25px;
+    /* DI BAWAH KANAN, TEPAT DI ATAS PANEL PUTIH */
+    right: 20px;
+    bottom: 115px;
 
-    z-index: 7;
+    z-index: 20;
 
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 6px;
+
+    padding: 8px;
+
+    border-radius: 22px;
+
+    background: rgba(255, 248, 239, 0.25);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
 }
 
 .horizontal-controls {
@@ -730,10 +743,10 @@ body {
     width: 45px;
     height: 45px;
 
-    border: 2px solid rgba(255,255,255,0.8);
+    border: 2px solid rgba(255, 255, 255, 0.85);
     border-radius: 14px;
 
-    background: rgba(255, 248, 239, 0.9);
+    background: rgba(255, 248, 239, 0.95);
     color: var(--purple-dark);
 
     font-family: inherit;
@@ -742,22 +755,24 @@ body {
 
     cursor: pointer;
 
-    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
 
-    transition: 0.15s;
+    transition:
+        transform 0.15s ease,
+        background 0.15s ease,
+        color 0.15s ease;
 }
 
 .mobile-controls button:hover {
     transform: scale(1.08);
-    background: white;
+    background: #ffffff;
 }
 
 .mobile-controls button:active {
     transform: scale(0.9);
     background: var(--pink);
-    color: white;
+    color: #ffffff;
 }
-
 .movement-help {
     bottom: 12px;
     left: 15px;
@@ -766,11 +781,6 @@ body {
     transform: none;
 
     font-size: 11px;
-}
-
-.mobile-controls {
-    right: 15px;
-    bottom: 55px;
 }
 
 .mobile-controls button {
@@ -1712,4 +1722,8 @@ body {
         transform: translateY(-12px) rotate(4deg);
     }
 
+}
+/* Tulisan kontrol awal game */
+#movementHelp.hide {
+    display: none;
 }
